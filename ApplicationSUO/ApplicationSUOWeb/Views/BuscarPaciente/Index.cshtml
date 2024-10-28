@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html lang="es" ng-app="SUO">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="/js/mvc/PacienteController.js"></script> 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.bootstrap5.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="~/css/stylebtnficha.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body ng-app="SUO" ng-controller="PacienteController">
+
+    <!-- Campo de búsqueda de paciente -->
+    <div class="box" style="padding-left: 73%">
+        <div class="container-4">
+            <input type="text" maxlength="12" id="search" ng-model="search" ng-change="formatearRutInput()" placeholder="Buscar Paciente..." />
+            <button type="button" class="icon" ng-click="buscarPaciente()"><i class="fa fa-search"></i></button>
+        </div>
+    </div>
+    <br />
+    <div class="input-group mb-3">
+        <label aria-label="Nombre de usuario" aria-describedby="basic-addon1" style="margin-right: 5px">Bienvenido(a):</label>
+        {{nombreCompleto}}
+    </div>
+    <div class="input-group mb-3" style="display: none">
+        <label aria-label="Nombre de usuario" aria-describedby="basic-addon1" style="margin-right: 5px">Id Perfil:</label>
+        {{idPerfil}}
+    </div>
+     <!-- Tabla de pacientes -->
+    <div id="GrillaPacientes" class="table-responsive-sm">
+        <table id="example" class="table table-striped nowrap">
+            <thead>
+                <tr style="font-size: 13px">
+                    <th scope="col">Rut del Paciente</th>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellido Paterno</th>
+                    <th scope="col">Apellido Materno</th>
+                    <th scope="col">Hospital, Clinica o Consultorio</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="paciente in pacientes" style="font-size: 13px">
+                    <td style ="display: none;">{{paciente.idAtenciones}}</td>
+                    <td id="btnRut" ng-hide="!mostrarBotonRut">
+                        <button data-bs-toggle="modal" data-bs-target="#modalFichaPaciente" class="btn-info"
+                                ng-click="llenarModalFicha(paciente.idAtenciones, paciente.rut)">
+                            {{paciente.rut}}
+                        </button>
+                    </td>
+                    <td id="tdRut" ng-hide="!mostrarTdRut">{{paciente.rut}}</td>
+                    <td>{{paciente.nombrePaciente}}</td>
+                    <td>{{paciente.apellidoPaterno}}</td>
+                    <td>{{paciente.apellidoMaterno}}</td>
+                    <td>{{paciente.nombreEntidad}}</td>
+                    <td>{{paciente.direccion}}</td>
+                    <td>{{paciente.estado}}</td>
+                </tr>                
+            </tbody>
+        </table>
+    </div>
+    <div class="modal fade" id="modalFichaPaciente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ficha Paciente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container mt-3">
+                        <form class="row g-3 justify-content-center">
+                            <div class="col-md-4" style="display: none">
+                                <label for="Id" class="form-label">ID</label>
+                                <input type="text" class="form-control" id="RutPaciente" ng-model="ficha.id">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="RutPaciente" class="form-label">Rut Paciente</label>
+                                <input type="text" class="form-control" id="rutPaciente" ng-model="ficha.rutPaciente" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="NombresPaciente" class="form-label">Nombres</label>
+                                <input type="text" class="form-control" id="nombresPaciente" ng-model="ficha.nombresPaciente" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="ApellidoPaterno" class="form-label">Apellido Paterno</label>
+                                <input type="text" class="form-control" id="apellidoPaterno" ng-model="ficha.apellidoPaterno" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="AellidoMaterno" class="form-label">Apellido Materno</label>
+                                <input type="text" class="form-control" id="apellidoMaterno" ng-model="ficha.apellidoMaterno" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="DireccionPaciente" class="form-label">Dirección Paciente</label>
+                                <input type="text" class="form-control" id="direccionPaciente" ng-model="ficha.direccionPaciente" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="ComunaPaciente" class="form-label">Comuna Paciente</label>
+                                <input type="text" class="form-control" id="comunaPaciente" ng-model="ficha.comunaPaciente" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="RegionPaciente" class="form-label">Región Paciente</label>
+                                <input type="text" class="form-control" id="regionPaciente" ng-model="ficha.regionPaciente" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="RutEntidad" class="form-label">Rut Entidad</label>
+                                <input type="text" class="form-control" id="rutEntidad" ng-model="ficha.rutEntidad" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="NombreEntidad" class="form-label">Nombre Entidad</label>
+                                <input type="text" class="form-control" id="nombreEntidad" ng-model="ficha.nombreEntidad" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="DireccionEntidad" class="form-label">Dirección Entidad</label>
+                                <input type="text" class="form-control" id="direccionEntidad" ng-model="ficha.direccionEntidad" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="ComunaEntidad" class="form-label">Comuna Entidad</label>
+                                <input type="text" class="form-control" id="comunaEntidad" ng-model="ficha.comunaEntidad" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="RegionEntidad" class="form-label">Región Entidad</label>
+                                <input type="text" class="form-control" id="regionEntidad" ng-model="ficha.regionEntidad" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="HoraAtencion" class="form-label">Hora de Atención</label>
+                                <input type="text" class="form-control" id="horaAtencion" ng-model="ficha.horaAtencion" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="Estado" class="form-label">Estado</label>
+                                <input type="text" class="form-control" id="estado" ng-model="ficha.estado" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="FechaAtencion" class="form-label">Fecha de Atención</label>
+                                <input type="text" class="form-control" id="fechaAtencion" ng-model="ficha.fechaAtencion" disabled>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="FechaAlta" class="form-label">Fecha de Alta</label>
+                                <input type="text" class="form-control" id="fechaAlta" ng-model="ficha.fechaAlta" disabled>
+                            </div>
+                            <div class="col-md-8">
+                                <label for="Diagnostico" class="form-label">Diagnóstico</label>
+                                <textarea class="form-control" id="diagnostico" ng-model="ficha.diagnostico" rows="3" disabled></textarea>
+                            </div>
+                            <div class="col-12 d-flex justify-content-center gap-2">
+                                <button class="custom-btn btn-eliminar d-flex align-items-center" ng-click="GeneraPDF(ficha.id, ficha.rutPaciente)" type="button">
+                                    <i class="fas fa-file-pdf" style="margin-right: 5px;"></i>
+                                    Generar Ficha
+                                </button>
+
+                                <button class="custom-btn btn-cerrar" type="button" data-bs-dismiss="modal">Cerrar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.bootstrap5.js"></script>    
+</body>
+</html>

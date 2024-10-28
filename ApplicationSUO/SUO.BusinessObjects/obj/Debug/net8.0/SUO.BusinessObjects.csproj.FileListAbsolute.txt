@@ -1,0 +1,12 @@
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessObjects\bin\Debug\net8.0\SUO.BusinessObjects.deps.json
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessObjects\bin\Debug\net8.0\SUO.BusinessObjects.dll
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessObjects\bin\Debug\net8.0\SUO.BusinessObjects.pdb
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessObjects\obj\Debug\net8.0\SUO.BusinessObjects.csproj.AssemblyReference.cache
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessObjects\obj\Debug\net8.0\SUO.BusinessObjects.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessObjects\obj\Debug\net8.0\SUO.BusinessObjects.AssemblyInfoInputs.cache
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessObjects\obj\Debug\net8.0\SUO.BusinessObjects.AssemblyInfo.cs
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessObjects\obj\Debug\net8.0\SUO.BusinessObjects.csproj.CoreCompileInputs.cache
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessObjects\obj\Debug\net8.0\SUO.BusinessObjects.dll
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessObjects\obj\Debug\net8.0\refint\SUO.BusinessObjects.dll
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessObjects\obj\Debug\net8.0\SUO.BusinessObjects.pdb
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessObjects\obj\Debug\net8.0\ref\SUO.BusinessObjects.dll

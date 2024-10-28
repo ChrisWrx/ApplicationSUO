@@ -1,0 +1,332 @@
+[
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.GeneraPDFController",
+    "Method": "GenerateFichaPdf",
+    "RelativePath": "ApplicationSUOWebApi",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fichaPaciente",
+        "Type": "ApplicationSUOWeb.Models.GeneraPDF.GeneraPDFResponse",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Byte[]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.AddEntidades.AddEntidadesController",
+    "Method": "CreaEntidad",
+    "RelativePath": "ApplicationSUOWebApi/AddNuevaEntidad",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addEntidadesRequest",
+        "Type": "SUO.BusinessObjects.AddEntidades.AddEntidadesRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.AddPerfilUsuarioController",
+    "Method": "CreatePerfilUsuario",
+    "RelativePath": "ApplicationSUOWebApi/AddPerfilUsuario",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "addPerfilUsuarioRequest",
+        "Type": "SUO.BusinessObjects.AddPerfilUsuario.AddPerfilUsuarioRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.Pacientes.PacientesController",
+    "Method": "BuscaPacienteRut",
+    "RelativePath": "ApplicationSUOWebApi/BuscaPaciente",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "RUT",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.DeletePerfilUsuario.DeletePerfilUsuarioController",
+    "Method": "EliminaPerfilUsuario",
+    "RelativePath": "ApplicationSUOWebApi/DeletePerfilUsuario",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "deleteUsuario",
+        "Type": "SUO.BusinessObjects.DeletePerfilUsuario.DeletePerfilUsuarioRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.FichaPaciente.FichaPacienteController",
+    "Method": "FichaPacienteIdRut",
+    "RelativePath": "ApplicationSUOWebApi/FichaPacienteByIdRut",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "RUT",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.GeneraPDFController",
+    "Method": "GeneraFichaPDF",
+    "RelativePath": "ApplicationSUOWebApi/GeneraFichaPDF",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fichaPaciente",
+        "Type": "ApplicationSUOWeb.Models.GeneraPDF.GeneraPDFResponse",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.RegionesComunas.RegionesComunasController",
+    "Method": "ListaComunasRegion",
+    "RelativePath": "ApplicationSUOWebApi/ListaComunasPorRegion",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "IDREGION",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.ListaEntidades.ListaEntidadesController",
+    "Method": "ListaEntidades",
+    "RelativePath": "ApplicationSUOWebApi/ListaDeEntidades",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.ListaEntidadByIdRut.ListaEntidadByIdRutController",
+    "Method": "ListaEntidadIdRut",
+    "RelativePath": "ApplicationSUOWebApi/ListaEntidadByIdRut",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "RUT",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.ListaRutNombreEntidad.ListaRutNombreEntidadController",
+    "Method": "ListaEntidades",
+    "RelativePath": "ApplicationSUOWebApi/ListaEntidades",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.EstadoPerfil.EstadoPerfilController",
+    "Method": "ListaEstadoPerfil",
+    "RelativePath": "ApplicationSUOWebApi/ListaEstadoPerfil",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.ListaImgCarrusel.ListaImgCarruselController",
+    "Method": "ListaImgCarrusel",
+    "RelativePath": "ApplicationSUOWebApi/ListaImagesCarruselById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.ListaPerfilUsuario.ListaPerfilUsuarioController",
+    "Method": "ListaPerfilUsuario",
+    "RelativePath": "ApplicationSUOWebApi/ListaPerfilesUsuarios",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.ListaPerfilUsuarioByIdRut.ListaPerfilUsuarioIdRutController",
+    "Method": "ListaPerfilUsuarioIdRut",
+    "RelativePath": "ApplicationSUOWebApi/ListaPerfilUsuarioByIdRut",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "RUT",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.RegionesComunas.RegionesComunasController",
+    "Method": "ListaRegiones",
+    "RelativePath": "ApplicationSUOWebApi/ListaRegiones",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.ListaRutNombreEntidad.ListaRutNombreEntidadController",
+    "Method": "ListaRutPorNombre",
+    "RelativePath": "ApplicationSUOWebApi/ListaRutPorEntidades",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ID",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.TipoPerfil.TipoPerfilController",
+    "Method": "ListaTipoPerfil",
+    "RelativePath": "ApplicationSUOWebApi/ListaTipoPerfil",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.LoginUsersController",
+    "Method": "LoginUsersByRutPass",
+    "RelativePath": "ApplicationSUOWebApi/LoginUsers",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuario",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.UpdEntidad.UpdEntidadController",
+    "Method": "ActualizaEntidad",
+    "RelativePath": "ApplicationSUOWebApi/UpdateEntidad",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updEntidadRequest",
+        "Type": "SUO.BusinessObjects.UpdEntidad.UpdEntidadRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApplicationSUOWebApi.Controllers.UpdPerfilUsuario.UpdPerfilUsuarioController",
+    "Method": "ActualizaPerfilUsuario",
+    "RelativePath": "ApplicationSUOWebApi/UpdatePerfilUsuario",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updPerfilUsuarioRequest",
+        "Type": "SUO.BusinessObjects.UpdPerfilUsuario.UpdPerfilUsuarioRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

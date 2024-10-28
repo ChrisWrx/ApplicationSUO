@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html lang="es" ng-app="SUO">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="~/js/mvc/PerfilUsuarioController.js"></script>
+    <link href="~/css/stylemodal.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.bootstrap5.css" rel="stylesheet" />
+</head>
+<body ng-controller="PerfilUsuarioController">
+    <div class="box" style="padding-left: 83%">
+    <div class="col-12 d-flex justify-content-center gap-2">
+         <button class="btn btn-success" type="button" data-bs-toggle="modal" ng-click="cambiarTitulo()" data-bs-target="#modalPerfilUsuario">Agregar Usuario</button>
+    </div>
+    </div>
+    <br/>
+    <div class="input-group mb-3">
+        <label aria-label="Nombre de usuario" aria-describedby="basic-addon1" style="margin-right: 5px">Bienvenido(a):</label>
+        {{nombreCompleto}}
+    </div>
+    <div class="input-group mb-3" style="display: none">
+        <label aria-label="Nombre de usuario" aria-describedby="basic-addon1" style="margin-right: 5px">Id Perfil:</label>
+        {{idPerfil}}
+    </div>
+    <div id="GrillaUsuarios" class="table-responsive-sm">
+        <table id="example" class="table table-striped nowrap" style="width:100%">
+            <thead>
+                <tr style="font-size: 13px">
+                    <th scope="col">Rut Usuario</th>
+                    <th scope="col">Nombre Usuario</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Rut Entidad</th>
+                    <th scope="col">Nombre Entidad</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Descripción Perfil</th>
+                    <th scope="col">Fecha de Creación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="perfil in perfiles" style="font-size: 11px">
+                    <td style="display: none;">{{perfil.idLogin}}</td>                 
+                    <td id="btnRut">
+                        <button data-bs-toggle="modal" data-bs-target="#modalModElPerfilUsuario" class="btn-info"
+                                ng-click="modificarUsuario(perfil.idLogin, perfil.rutUsuario)">
+                            {{perfil.rutUsuario}}
+                        </button>
+                    </td>
+                    <td>{{perfil.nombreUsuario}}</td>
+                    <td>{{perfil.correoUsuario}}</td>
+                    <td>{{perfil.rutEntidad}}</td>
+                    <td>{{perfil.nombreEntidad}}</td>
+                    <td>{{perfil.estado}}</td>
+                    <td>{{perfil.perfil}}</td>
+                    <td>{{perfil.fechaRegistro}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    @* Modal Agregar Usuario *@
+    <div class="modal fade" id="modalPerfilUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" ng-bind="tituloAgregar"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container mt-3">
+                        <form class="row g-3 justify-content-center">
+                            <div id="creacionPerfil">
+                                <div class="container mt-3">                                
+                                        <div class="row">                                                                                
+                                            <div class="col-md-4 col-lg-4">
+                                                <label for="rutUsuario" class="form-label">Rut Usuario:</label>
+                                                <input type="text" class="form-control form-control-sm" maxlength="12" id="rutDeUsuario" ng-model="rutUsuario" ng-change="formatearRutInput()">
+                                            </div>
+                                            <div class="col-md-4 col-lg-4">
+                                                <label for="nombre" class="form-label">Nombre:</label>
+                                                <input type="text" class="form-control form-control-sm" id="nombre" ng-model="nombre">
+                                            </div>
+                                            <div class="col-md-4 col-lg-4">
+                                                <label for="apPaterno" class="form-label">Apellido Paterno:</label>
+                                                <input type="text" class="form-control form-control-sm" id="apPaterno" ng-model="apPaterno">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 col-lg-4">
+                                                <label for="apMaterno" class="form-label">Apellido Materno:</label>
+                                                <input type="text" class="form-control form-control-sm" id="apMaterno" ng-model="apMaterno">
+                                            </div>
+                                            <div class="col-md-4 col-lg-4">
+                                                <label for="password" class="form-label">Password:</label>
+                                                <input type="password" class="form-control form-control-sm" id="password" ng-model="password" ng-change="validarPassword()">
+                                            <div class="col-md-12">
+                                                <span style="color:red;" ng-show="!passwordsCoinciden">Las contraseñas no coinciden.</span>
+                                            </div>
+                                            </div>
+                                            <div class="col-md-4 col-lg-4">
+                                                <label for="confirmaPass" class="form-label">Confirmar Password:</label>
+                                                <input type="password" class="form-control form-control-sm" id="confirmaPass" ng-model="confirmaPass" ng-change="validarPassword()">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 col-lg-4">
+                                                <label for="nombreEntidad" class="form-label">Nombre Entidad:</label>
+                                                <select class="form-select form-select-sm" id="entidad" ng-model="nombreEntidad"
+                                                        ng-options="entidad as entidad.nombreEntidad for entidad in entidades track by entidad.idEntidad"
+                                                        ng-change="GetRut()">
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 col-lg-4" ng-hide="!listRut">
+                                                <label for="rutEntidad" class="form-label">Rut Entidad:</label>
+                                            <select class="form-select form-select-sm" id="rutEntidad"
+                                                    ng-model="rutEntidad"
+                                                    ng-options="rut.rutEntidad as rut.rutEntidad for rut in rut">
+                                            </select>                                            
+                                            </div>
+                                            <div class="col-md-4 col-lg-4">
+                                                <label for="estadoPerfil" class="form-label">Estado:</label>
+                                                <select class="form-select form-select-sm" id="estadoPerfil" 
+                                                        ng-model="estado.idEstadoPerfil"
+                                                        data-ng-options="estadoPerfil.idEstado as estadoPerfil.descripcionEstado for estadoPerfil in estadosPerfil">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4 col-lg-4">
+                                                <label for="tipoPerfil" class="form-label">Tipo Perfil:</label>
+                                                <select class="form-select form-select-sm" id="tipoPerfil"
+                                                    ng-model="perfil.idTiposPerfiles"
+                                                    data-ng-options="tipoPerfil.idPerfil as tipoPerfil.descripcionPerfil for tipoPerfil in tiposPerfil">
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 col-lg-4">
+                                                <label for="correo" class="form-label">Correo:</label>
+                                                <input type="email" class="form-control form-control-sm" id="correo" ng-model="correoUsuario">
+                                            </div>                                      
+                                    </div>                                  
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center gap-4">                                    
+                                    <button class="custom-btn btn-save" type="button" ng-click="agregarUsuario()">Guardar</button>                                   
+                                    <button class="custom-btn btn-cerrar" type="button" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    @* Fin Modal Agregar Usuario *@
+
+    @* Modal Modificar o Eliminar Usuario *@
+    <div class="modal fade" id="modalModElPerfilUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modificar o Eliminar Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container mt-3">
+                        <form class="row g-3 justify-content-center">
+                            <div id="creacionPerfil">
+                                <div class="container mt-3">
+                                    <!-- Fila 1 -->
+                                    <div class="row">
+                                        <div>
+                                            <input type="text" class="form-control form-control-sm" maxlength="12" id="idLogin" ng-model="user.idLogin" style="display: none">
+                                        </div>
+                                        <div>
+                                            <input type="text" class="form-control form-control-sm" maxlength="12" id="idUsuario" ng-model="user.idUsuario" style="display: none">
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="rutUsuario" class="form-label">Rut Usuario:</label>
+                                            <input type="text" class="form-control form-control-sm" maxlength="12" id="rutUsuario" ng-model="user.rutUsuario" ng-change="formatearRutInput()" disabled>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="nombre" class="form-label">Nombre:</label>
+                                            <input type="text" class="form-control form-control-sm" id="nombreUsuario" ng-model="user.nombreUsuario">
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="apPaterno" class="form-label">Apellido Paterno:</label>
+                                            <input type="text" class="form-control form-control-sm" id="apellidoPaterno" ng-model="user.apellidoPaterno">
+                                        </div>
+                                    </div>
+                                    <!-- Fila 2 -->
+                                    <div class="row">
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="apMaterno" class="form-label">Apellido Materno:</label>
+                                            <input type="text" class="form-control form-control-sm" id="apellidoMaterno" ng-model="user.apellidoMaterno">
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="correo" class="form-label">Correo:</label>
+                                            <input type="email" class="form-control form-control-sm" id="correoUsuario" ng-model="user.correoUsuario">
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="fechaRegistro" class="form-label">Fecha de Registro:</label>
+                                            <input type="text" class="form-control form-control-sm" id="fechaRegistro" ng-model="user.fechaRegistro" disabled>
+                                        </div>
+                                    </div>
+                                    <!-- Fila 3 -->
+                                    <div class="row">
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="nombreEntidad" class="form-label">Nombre Entidad:</label>
+                                            <select class="form-select form-select-sm" id="entidad" ng-model="nombreEntidad"
+                                                    ng-options="entidad as entidad.nombreEntidad for entidad in entidades track by entidad.idEntidad"
+                                                    ng-change="GetRut()">
+                                            </select>
+
+                                        </div>
+                                        <div class="col-md-4 col-lg-4" ng-hide="!listRut">
+                                            <label for="rutEntidad" class="form-label">Rut Entidad:</label>
+                                            <select class="form-select form-select-sm" id="rutEntidad"
+                                                    ng-model="rutEntidad"
+                                                    ng-options="rut.rutEntidad as rut.rutEntidad for rut in rut">
+                                            </select>                                           
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="estadoPerfil" class="form-label">Estado:</label>
+                                            <select class="form-select form-select-sm" id="descripcionEstado"
+                                                    ng-model="user.descripcionEstado"
+                                                    ng-options="estadoPerfil.idEstado as estadoPerfil.descripcionEstado for estadoPerfil in estadosPerfil">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- Fila 4 -->
+                                    <div class="row">
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="tipoPerfil" class="form-label">Tipo Perfil:</label>
+                                            <select class="form-select form-select-sm" id="descripcionPerfil"
+                                                    ng-model="user.idPerfil"
+                                                    ng-options="tipoPerfil.descripcionPerfil as tipoPerfil.descripcionPerfil for tipoPerfil in tiposPerfil">
+                                             </select>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="fechaModificacion" class="form-label">Fecha de Modificación:</label>
+                                            <input type="text" class="form-control form-control-sm" id="fechaModificacion" ng-model="user.fechaModificacion" disabled>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center gap-4">
+                                    <button class="custom-btn btn-save" Id="btnModificar" type="button" ng-click="modificarPerfilUsuario()">Modificar</button>
+                                    <button class="custom-btn btn-eliminar" id="btnEliminar" type="button" ng-click="eliminarPerfilUsuario()">Eliminar</button>
+                                    <button class="custom-btn btn-cerrar" type="button" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   @*  Fin Modal Modificar o Eliminar Usuario *@
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>    
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.bootstrap5.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#example').DataTable();
+        });
+    </script>
+</body>
+</html>

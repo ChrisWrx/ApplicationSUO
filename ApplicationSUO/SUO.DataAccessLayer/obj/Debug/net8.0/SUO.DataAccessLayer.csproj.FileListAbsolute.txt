@@ -1,0 +1,15 @@
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.DataAccessLayer\bin\Debug\net8.0\SUO.DataAccessLayer.deps.json
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.DataAccessLayer\bin\Debug\net8.0\SUO.DataAccessLayer.dll
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.DataAccessLayer\bin\Debug\net8.0\SUO.DataAccessLayer.pdb
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.DataAccessLayer\bin\Debug\net8.0\SUO.BusinessObjects.dll
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.DataAccessLayer\bin\Debug\net8.0\SUO.BusinessObjects.pdb
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.DataAccessLayer\obj\Debug\net8.0\SUO.DataAccessLayer.csproj.AssemblyReference.cache
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.DataAccessLayer\obj\Debug\net8.0\SUO.DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.DataAccessLayer\obj\Debug\net8.0\SUO.DataAccessLayer.AssemblyInfoInputs.cache
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.DataAccessLayer\obj\Debug\net8.0\SUO.DataAccessLayer.AssemblyInfo.cs
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.DataAccessLayer\obj\Debug\net8.0\SUO.DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.DataAccessLayer\obj\Debug\net8.0\SUO.Data.1F616DD0.Up2Date
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.DataAccessLayer\obj\Debug\net8.0\SUO.DataAccessLayer.dll
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.DataAccessLayer\obj\Debug\net8.0\refint\SUO.DataAccessLayer.dll
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.DataAccessLayer\obj\Debug\net8.0\SUO.DataAccessLayer.pdb
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.DataAccessLayer\obj\Debug\net8.0\ref\SUO.DataAccessLayer.dll

@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<html lang="es" ng-app="SUO">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="~/js/mvc/EntidadController.js"></script>
+    <link href="~/css/stylemodal.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/responsive/3.0.3/css/responsive.bootstrap5.css" rel="stylesheet" />
+
+
+
+</head>
+<body ng-controller="EntidadController">
+    <div class="box" style="padding-left: 83%">
+        <div class="col-12 d-flex justify-content-center gap-2">
+            <button class="btn btn-success" id="btnEntidad" type="button" data-bs-toggle="modal" ng-click="agregarEntidad()" data-bs-target="#modalAgregarEntidades">Agregar Entidad</button>
+        </div>
+    </div>
+    <br />
+    <div class="input-group mb-3">
+        <label aria-label="Nombre de usuario" aria-describedby="basic-addon1" style="margin-right: 5px">Bienvenido(a):</label>
+        {{nombreCompleto}}
+    </div>
+    <div class="input-group mb-3" style="display: none">
+        <label aria-label="Nombre de usuario" aria-describedby="basic-addon1" style="margin-right: 5px">Id Perfil:</label>
+        {{idPerfil}}
+    </div>
+    <div id="GrillaEntidades" class="table-responsive-sm">
+        <table id="example" class="table table-striped nowrap" style="width:100%">
+            <thead>
+                <tr style="font-size: 12px">
+                    <th scope="col">Rut Entidad</th>
+                    <th scope="col">Nombre Entidad</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Comuna</th>
+                    <th scope="col">Región</th>
+                    <th scope="col">Nombre del Contacto</th>
+                    <th scope="col">Teléfono</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ent in entidades" style="font-size: 12px">
+                    <td style="display: none;">{{ent.idEntidad}}</td> <!-- Oculta esta columna si no la necesitas -->
+                    <td id="btnRut">
+                        <button data-bs-toggle="modal" data-bs-target="#modalModificarEntidades" class="btn-info"
+                                ng-click="editarEntidad(ent.idEntidad, ent.rutEntidad)">
+                            {{ent.rutEntidad}}
+                        </button>
+                    </td>
+                    <td>{{ent.nombreEntidad}}</td>
+                    <td>{{ent.direccionEntidad}}</td>
+                    <td>{{ent.comunaEntidad}}</td>
+                    <td>{{ent.regionEntidad}}</td>
+                    <td>{{ent.contactoEntidad}}</td>
+                    <td>{{ent.telefonoEntidad}}</td> <!-- Asegúrate de que este campo existe en 'entidades' -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    @* Modal Agregar Entidades *@
+    <div class="modal fade" id="modalAgregarEntidades" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" ng-bind="tituloEntidades"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container mt-3">
+                        <form class="row g-3 justify-content-center">
+                            <div id="creacionPerfil">
+                                <div class="container mt-3">
+                                    <div class="row">                                       
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="rutUsuario" class="form-label">Rut Entidad:</label>
+                                            <input type="text" class="form-control form-control-sm" maxlength="12" id="RutEntidad" ng-model="rutEntidad" ng-change="formatearRutInput()">
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="nombreEntidad" class="form-label">Nombre Entidad:</label>
+                                            <input type="text" class="form-control form-control-sm" id="NombreEntidad" ng-model="nombreEntidad">
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="direccionEntidad" class="form-label">Dirección:</label>
+                                            <input type="text" class="form-control form-control-sm" id="DireccionEntidad" ng-model="direccionEntidad">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="regionEntidad" class="form-label">Región:</label>
+                                            <select class="form-control form-control-sm"
+                                                    data-ng-model="region.idRegion" data-ng-options="region.idRegion as region.region for region in regiones"
+                                                    ng-change="GetComunas()">
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4" ng-hide="!listComunas">
+                                            <label for="comunaEntidad" class="form-label">Comuna:</label>
+                                            <select class="form-control form-control-sm" data-ng-model="comuna.idComuna"
+                                                    data-ng-options="comuna.idComuna as comuna.comuna for comuna in comunas">
+                                             </select>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="ContactoEntidad" class="form-label">Contacto Entidad:</label>
+                                            <input type="text" class="form-control form-control-sm" id="ContactoEntidad" ng-model="contactoEntidad">                                            
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="telefonoEntidad" class="form-label">Teléfono:</label>
+                                            <input type="text" class="form-control form-control-sm" id="TelefonoEntidad" ng-model="telefonoEntidad">
+                                        </div>                                     
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 col-lg-4"> 
+                                            <label for="imgEntidad"></label>
+                                            <div class="card" style="width: 18rem;">                                               
+                                                <img id="imgEntidad1" src="~/img/Upload.jpg" class="card-img-top" ng-src="{{imgEntidad1}}" alt="Imagen no disponible" style="width: 100%; height: auto; object-fit: contain;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"></h5>
+                                                    <p class="card-text"></p>                                                                                       
+                                                    <input type="file" id="fileInput1" accept="image/*" style="display: none;" />
+                                                    <a href="#" class="btn btn-success" id="uploadButton1">Adjuntar Imagen N°1</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4"> 
+                                            <label for="imgEntidad2"></label>
+                                            <div class="card" style="width: 18rem;">
+                                                <img id="imgEntidad2" src="~/img/Upload.jpg" class="card-img-top" ng-src="{{imgEntidad2}}" alt="Imagen no disponible" style="width: 100%; height: auto; object-fit: contain;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"></h5>
+                                                    <p class="card-text"></p>
+                                                    <input type="file" id="fileInput2" accept="image/*" style="display: none;" />
+                                                    <a href="#" class="btn btn-success" id="uploadButton2">Adjuntar Imagen N°2</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="imgEntidad3"></label>
+                                            <div class="card" style="width: 18rem;">
+                                                <img id="imgEntidad3" src="~/img/Upload.jpg" class="card-img-top" ng-src="{{imgEntidad3}}" alt="Imagen no disponible" style="width: 100%; height: auto; object-fit: contain;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"></h5>
+                                                    <p class="card-text"></p>
+                                                    <input type="file" id="fileInput3" accept="image/*" style="display: none;" />
+                                                    <a href="#" class="btn btn-success" id="uploadButton3">Adjuntar Imagen N°3</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center gap-4">
+                                    <button class="custom-btn btn-save" type="button" ng-click="agregarEntidad()">Guardar</button>                                    
+                                    <button class="custom-btn btn-cerrar" type="button" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* Fin Modal Agregar Entidades *@
+
+    @* Modal Modificar Entidades *@
+    <div class="modal fade" id="modalModificarEntidades" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" ng-bind="tituloEntidades"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container mt-3">
+                        <form class="row g-3 justify-content-center">
+                            <div id="creacionPerfil">
+                                <div class="container mt-3">
+                                    <div class="row">
+                                        <div>
+                                            <input type="text" class="form-control form-control-sm" maxlength="12" id="IdEntidad" ng-model="ent.idEntidad" style="display: none">
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="ErutUsuario" class="form-label">Rut Entidad:</label>
+                                            <input type="text" class="form-control form-control-sm" maxlength="12" id="RutEntidad" ng-model="ent.rutEntidad" ng-change="formatearRutInput()" disabled>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="EnombreEntidad" class="form-label">Nombre Entidad:</label>
+                                            <input type="text" class="form-control form-control-sm" id="NombreEntidad" ng-model="ent.nombreEntidad" disabled>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="EdireccionEntidad" class="form-label">Dirección:</label>
+                                            <input type="text" class="form-control form-control-sm" id="DireccionEntidad" ng-model="ent.direccionEntidad">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="regionEntidad" class="form-label">Región:</label>
+                                            <input type="text" class="form-control form-control-sm" id="regionEntidad" ng-model="ent.regionEntidad" disabled>                                           
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="comunaEntidad" class="form-label">Comuna:</label>
+                                            <input type="text" class="form-control form-control-sm" id="comunaEntidad" ng-model="ent.comunaEntidad" disabled>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="EContactoEntidad" class="form-label">Contacto Entidad:</label>
+                                            <input type="text" class="form-control form-control-sm" id="ContactoEntidad" ng-model="ent.contactoEntidad">
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="telefonoEntidad" class="form-label">Teléfono:</label>
+                                            <input type="text" class="form-control form-control-sm" id="TelefonoEntidad" ng-model="ent.telefonoEntidad">
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="fechaModificacion" class="form-label">Fecha de Modificación:</label>
+                                            <input type="text" class="form-control form-control-sm" id="FechaModificacion" ng-model="ent.fechaModificacion" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="EimgEntidad"></label>
+                                            <div class="card" style="width: 18rem;">
+                                                <img id="imgEntidad1" src="~/img/Upload.jpg" class="card-img-top" ng-src="{{ent.imgEntidad1}}" alt="Imagen no disponible" style="width: 100%; height: auto; object-fit: contain;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"></h5>
+                                                    <p class="card-text"></p>
+                                                    <input type="file" id="fileInput4" accept="image/*" style="display: none;" />
+                                                    <a href="#" class="btn btn-success" id="uploadButton4">Adjuntar Imagen N°1</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="imgEntidad2"></label>
+                                            <div class="card" style="width: 18rem;">
+                                                <img id="imgEntidad2" src="~/img/Upload.jpg" class="card-img-top" ng-src="{{ent.imgEntidad2}}" alt="Imagen no disponible" style="width: 100%; height: auto; object-fit: contain;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"></h5>
+                                                    <p class="card-text"></p>
+                                                    <input type="file" id="fileInput5" accept="image/*" style="display: none;" />
+                                                    <a href="#" class="btn btn-success" id="uploadButton5">Adjuntar Imagen N°2</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 col-lg-4">
+                                            <label for="imgEntidad3"></label>
+                                            <div class="card" style="width: 18rem;">
+                                                <img id="imgEntidad3" src="~/img/Upload.jpg" class="card-img-top" ng-src="{{ent.imgEntidad3}}" alt="Imagen no disponible" style="width: 100%; height: auto; object-fit: contain;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title"></h5>
+                                                    <p class="card-text"></p>
+                                                    <input type="file" id="fileInput6" accept="image/*" style="display: none;" />
+                                                    <a href="#" class="btn btn-success" id="uploadButton6">Adjuntar Imagen N°3</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center gap-4">                                    
+                                    <button class="custom-btn btn-save" Id="btnModificar" type="button" ng-click="modificarEntidad()">Modificar</button>
+                                    <button class="custom-btn btn-cerrar" type="button" data-bs-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* Fin Modal Modificar Entidades *@
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/dataTables.responsive.js"></script>
+    <script src="https://cdn.datatables.net/responsive/3.0.3/js/responsive.bootstrap5.js"></script>
+    <script>
+        $(document).ready(function () {
+            
+            $('#example').DataTable();
+        });
+    </script>
+
+
+    <script>
+        function previewImage(event, previewId) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const output = document.getElementById(previewId);
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+</body>
+</html>
+

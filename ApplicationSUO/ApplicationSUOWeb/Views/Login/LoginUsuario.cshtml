@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="es" ng-app="SUO">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="~/js/mvc/LoginController.js"></script>
+    <link href="~/css/stylecarousel.css" rel="stylesheet" />   
+</head>
+<body ng-controller="LoginController">
+    <div ng-app="SUO" class="container">
+        <div class="row">            
+            <form id="DatosUsuarios">
+                <div class="row">                    
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <label aria-label="Nombre de usuario" aria-describedby="basic-addon1" style="margin-right: 5px">Bienvenido(a):</label>
+                            {{nombreCompleto}}
+                        </div>
+                        <div class="input-group mb-3">
+                            <label aria-label="Correo" aria-describedby="basic-addon1" style="margin-right: 5px">Correo:</label>
+                            {{correoUsuario}}
+                        </div>
+                        <div class="input-group mb-3">
+                            <label aria-label="Entidad" aria-describedby="basic-addon1" style="margin-right: 5px">Entidad:</label>
+                            {{nombreEntidad}}
+                        </div>
+                        <div class="input-group mb-3">
+                            <label aria-label="Rut Entidad" aria-describedby="basic-addon1" style="margin-right: 5px">Rut Entidad:</label>
+                            {{rutEntidad}}
+                        </div>
+                        <div class="input-group mb-3">
+                            <label aria-label="Último Inicio de Sesión" aria-describedby="basic-addon1" style="margin-right: 5px">Último Inicio de Sesión:</label>
+                            {{ultimaSession}}
+                        </div>
+                        <div class="input-group mb-3" style="display: none">
+                            <label aria-label="Nombre de usuario" aria-describedby="basic-addon1" style="margin-right: 5px">Id Perfil:</label>
+                            {{idPerfil}}
+                        </div> 
+                    </div>                   
+                    <div class="input-group mb-3" style="display: none">
+                        <label aria-label="ID de entidad" style="margin-right: 5px">ID Entidad:</label>
+                        {{img.idEntidad}}
+                    </div>                  
+                    <div class="col-md-6">
+                        <div id="carouselExampleFade" class="carousel slide carousel-fade">
+                            <div class="carousel-inner" style="height: 300px;">                                
+                                <div class="carousel-item active" data-bs-interval="10000">
+                                     <img id="imgEntidad1" ng-src="{{img.imgEntidad1}}" class="d-block w-100 img-custom" alt="Imagen 1" />
+                                </div>
+                                <div class="carousel-item" data-bs-interval="2000">
+                                      <img id="imgEntidad2" ng-src="{{img.imgEntidad2}}" class="d-block w-100 img-custom" alt="Imagen 2" />
+                                </div>
+                                <div class="carousel-item">
+                                      <img id="imgEntidad3" ng-src="{{img.imgEntidad3}}" class="d-block w-100 img-custom" alt="Imagen 3" />
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>                    
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+
+</html>

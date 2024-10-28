@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "IIITTZk36InAUxnis/U64BT2YG6q9B8WmYJzJsbETy4=",
+  "Source": "ApplicationSUOWebApi",
+  "BasePath": "_content/ApplicationSUOWebApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

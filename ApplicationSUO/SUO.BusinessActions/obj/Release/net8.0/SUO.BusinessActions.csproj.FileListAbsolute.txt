@@ -1,0 +1,17 @@
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\bin\Release\net8.0\SUO.BusinessActions.deps.json
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\bin\Release\net8.0\SUO.BusinessActions.dll
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\bin\Release\net8.0\SUO.BusinessActions.pdb
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\bin\Release\net8.0\SUO.BusinessObjects.dll
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\bin\Release\net8.0\SUO.DataAccessLayer.dll
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\bin\Release\net8.0\SUO.BusinessObjects.pdb
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\bin\Release\net8.0\SUO.DataAccessLayer.pdb
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\obj\Release\net8.0\SUO.BusinessActions.csproj.AssemblyReference.cache
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\obj\Release\net8.0\SUO.BusinessActions.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\obj\Release\net8.0\SUO.BusinessActions.AssemblyInfoInputs.cache
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\obj\Release\net8.0\SUO.BusinessActions.AssemblyInfo.cs
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\obj\Release\net8.0\SUO.BusinessActions.csproj.CoreCompileInputs.cache
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\obj\Release\net8.0\SUO.Busi.4D974395.Up2Date
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\obj\Release\net8.0\SUO.BusinessActions.dll
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\obj\Release\net8.0\refint\SUO.BusinessActions.dll
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\obj\Release\net8.0\SUO.BusinessActions.pdb
+C:\Users\cris_\Desktop\ProyectoSUO\ApplicationSUO\SUO.BusinessActions\obj\Release\net8.0\ref\SUO.BusinessActions.dll
